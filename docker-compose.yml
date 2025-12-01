@@ -1,0 +1,82 @@
+# version: '3.8'
+
+services:
+  # Service Ollama avec Mistral
+  ollama:
+    image: ollama/ollama:latest
+    container_name: lemadio_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:          # ou environment sur docker run
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    restart: unless-stopped
+    networks:
+      - lemadio_network
+
+  # Service ChromaDB
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: lemadio_chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    restart: unless-stopped
+    networks:
+      - lemadio_network
+
+  # Backend Python avec FastAPI
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lemadio_backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - ./documents:/app/documents
+      - chroma_data:/app/chroma_db  
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    networks:
+      - lemadio_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lemadio_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - lemadio_network
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+
+volumes:
+  ollama_data:
+  chroma_data:
+
+networks:
+  lemadio_network:
+    driver: bridge
