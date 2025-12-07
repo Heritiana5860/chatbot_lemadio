@@ -1,113 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'config/constants.dart';
-import 'screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  // Configurer l'orientation et la barre de statut
+// Services
+import 'services/api_service.dart';
+import 'services/storage_service.dart';
+import 'services/connectivity_service.dart';
+
+// Providers
+import 'providers/chat_provider.dart';
+
+// Pages
+import 'pages/onboarding_page.dart'; // 🆕
+import 'pages/chat_page.dart';
+
+// Theme
+import 'core/constants/app_colors.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  // Initialiser les services
+  final storageService = StorageService();
+  final apiService = ApiService();
+  final connectivityService = ConnectivityService();
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
+  // Vérifier la connectivité initiale
+  await connectivityService.checkConnectivity();
+
+  // 🆕 Vérifier si l'onboarding est complété
+  final onboardingCompleted = await storageService.isOnboardingCompleted();
+
+  runApp(
+    MyApp(
+      storageService: storageService,
+      apiService: apiService,
+      connectivityService: connectivityService,
+      showOnboarding: !onboardingCompleted, // 🆕
     ),
   );
-
-  runApp(const AdesChatbotApp());
 }
 
-class AdesChatbotApp extends StatelessWidget {
-  const AdesChatbotApp({super.key});
+class MyApp extends StatelessWidget {
+  final StorageService storageService;
+  final ApiService apiService;
+  final ConnectivityService connectivityService;
+  final bool showOnboarding; // 🆕
+
+  const MyApp({
+    super.key,
+    required this.storageService,
+    required this.apiService,
+    required this.connectivityService,
+    required this.showOnboarding,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppStrings.appName,
-      debugShowCheckedModeBanner: false,
-
-      // Theme
-      theme: ThemeData(
-        // Couleurs principales
-        primaryColor: AppColors.primary,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
-          primary: AppColors.primary,
-          secondary: AppColors.primaryLight,
-          error: AppColors.error,
-        ),
-
-        // Fond
-        scaffoldBackgroundColor: AppColors.background,
-
-        // AppBar
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: false,
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-
-        // Boutons
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSizes.paddingLarge,
-              vertical: AppSizes.paddingMedium,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-            ),
-            elevation: 2,
+    return MultiProvider(
+      providers: [
+        // Service Providers
+        ChangeNotifierProvider.value(value: connectivityService),
+        Provider.value(value: storageService),
+        // Chat Provider
+        ChangeNotifierProvider(
+          create: (context) => ChatProvider(
+            apiService: apiService,
+            storageService: storageService,
+            connectivityService: connectivityService,
           ),
         ),
-
-        // Cards
-        cardTheme: CardThemeData(
-          color: AppColors.cardBackground,
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-          ),
-        ),
-
-        // Input
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: AppColors.background,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-            borderSide: const BorderSide(color: AppColors.primary, width: 2),
-          ),
-        ),
-
-        // Texte
-        textTheme: const TextTheme(
-          displayLarge: AppTextStyles.heading1,
-          displayMedium: AppTextStyles.heading2,
-          bodyLarge: AppTextStyles.body,
-          bodyMedium: AppTextStyles.bodySmall,
-          labelSmall: AppTextStyles.caption,
-        ),
-
-        // Polices
-        fontFamily: 'Roboto',
+      ],
+      child: MaterialApp(
+        title: 'Lemadio Formation',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        home: showOnboarding ? const OnboardingPage() : const ChatPage(),
       ),
-
-      // Page initiale
-      home: const SplashScreen(),
     );
   }
 }

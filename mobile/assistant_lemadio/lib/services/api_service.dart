@@ -1,105 +1,191 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../models/message.dart';
+import 'dart:async';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.52:5000';
+  static const String baseUrl = 'http://192.168.1.52:8080';
+  final Duration timeout = const Duration(seconds: 60);
 
-  /// Envoie un message au chatbot et retourne la réponse
-  Future<Message> sendMessage(String userMessage) async {
+  /// Envoyer un message au chatbot
+  Future<Map<String, dynamic>> sendMessage(String question) async {
     try {
-      final url = Uri.parse('$baseUrl/api/chat');
+      final url = Uri.parse('$baseUrl/chat');
 
       final response = await http
           .post(
             url,
-            headers: {'Content-Type': 'application/json'},
-            body: jsonEncode({'message': userMessage}),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: jsonEncode({
+              'question': question,
+              'conversation_id':
+                  'mobile_${DateTime.now().millisecondsSinceEpoch}',
+            }),
           )
-          .timeout(
-            const Duration(seconds: 60), // Timeout de 60 secondes
-          );
-
-      debugPrint("Response: $response");
+          .timeout(timeout);
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        debugPrint("Health response: $data");
+        final data = jsonDecode(utf8.decode(response.bodyBytes));
+        return {
+          'answer': data['answer'] ?? 'Aucune réponse disponible',
+          'sources': data['sources'] ?? [],
+          'timestamp': data['timestamp'] ?? DateTime.now().toIso8601String(),
+        };
+      } else if (response.statusCode == 503) {
+        throw Exception('Le système n\'est pas encore initialisé.');
+      } else {
+        throw Exception('Erreur du serveur (${response.statusCode}).');
+      }
+    } on TimeoutException {
+      throw Exception('La requête a pris trop de temps (>60s).');
+    } catch (e) {
+      if (e is Exception) rethrow;
+      throw Exception('Erreur inattendue : $e');
+    }
+  }
 
-        return Message.bot(
-          data['reply'] as String,
-          ragUsed: data['rag_used'] as bool? ?? false,
+  /// 🆕 Envoyer l'historique pour analytics
+  Future<void> syncAnalytics(List<Map<String, dynamic>> historyItems) async {
+    try {
+      final url = Uri.parse('$baseUrl/analytics/sync-mobile');
+
+      // ✅ LOG 1: Afficher le nombre d'items
+      debugPrint(
+        '📤 [SYNC] Tentative de sync de ${historyItems.length} entrées',
+      );
+
+      // ✅ LOG 2: Afficher le premier item pour debug
+      if (historyItems.isNotEmpty) {
+        debugPrint('📋 [SYNC] Premier item: ${jsonEncode(historyItems.first)}');
+      }
+
+      final body = jsonEncode({
+        'data': historyItems,
+        'synced_at': DateTime.now().toIso8601String(),
+      });
+
+      // ✅ LOG 3: Afficher la taille du body
+      debugPrint('📦 [SYNC] Taille du body: ${body.length} caractères');
+
+      final response = await http
+          .post(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: body,
+          )
+          .timeout(const Duration(seconds: 30));
+
+      // ✅ LOG 4: Afficher la réponse
+      debugPrint('📥 [SYNC] Status: ${response.statusCode}');
+      debugPrint('📥 [SYNC] Body: ${response.body}');
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = jsonDecode(utf8.decode(response.bodyBytes));
+        debugPrint(
+          '✅ [SYNC] Succès: ${responseData['inserted']}/${responseData['total']} entrées synchronisées',
         );
       } else {
-        throw Exception('Erreur serveur: ${response.statusCode}');
+        debugPrint('❌ [SYNC] Erreur ${response.statusCode}: ${response.body}');
+        throw Exception(
+          'Erreur synchronisation (${response.statusCode}): ${response.body}',
+        );
       }
-    } on http.ClientException {
-      throw Exception(
-        'Erreur de connexion: Impossible de joindre le serveur. Vérifiez votre connexion internet.',
-      );
-    } on TimeoutException {
-      throw Exception(
-        'Le serveur met trop de temps à répondre. Veuillez réessayer.',
-      );
     } catch (e) {
-      throw Exception('Erreur inattendue: $e');
+      debugPrint('❌ [SYNC] Exception: $e');
+      throw Exception('Erreur sync analytics : $e');
     }
   }
 
-  /// Vérifie la santé du backend
+  /// Vérifier l'état de santé de l'API
   Future<Map<String, dynamic>> checkHealth() async {
     try {
-      final url = Uri.parse('$baseUrl/api/health');
-      debugPrint("Vérification santé sur : $url");
-
-      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      final url = Uri.parse('$baseUrl/health');
+      final response = await http.get(url).timeout(const Duration(seconds: 5));
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        debugPrint("Réponse health : $data");
-
-        // ADAPTÉ À TA VRAIE RÉPONSE BACKEND
-        return {
-          'backend': data['status'] == 'running' ? 'running' : 'error',
-          'rag': data['rag'] == true ? 'ok' : 'error', // rag est un booléen
-          'ollama': data['llm'] ?? 'unknown',
-        };
+        return jsonDecode(utf8.decode(response.bodyBytes));
       } else {
-        debugPrint("Health HTTP error: ${response.statusCode}");
-        return {'backend': 'error', 'rag': 'error'};
+        throw Exception('API non disponible (${response.statusCode})');
       }
     } catch (e) {
-      debugPrint("Health check exception: $e");
-      return {'backend': 'disconnected', 'rag': 'error', 'error': e.toString()};
+      throw Exception('Impossible de se connecter à l\'API : $e');
     }
   }
 
-  /// Teste la recherche RAG (pour déboguer)
-  Future<List<String>> searchDocumentation(String query) async {
+  /// Obtenir les statistiques du système
+  Future<Map<String, dynamic>> getStats() async {
     try {
-      final url = Uri.parse('$baseUrl/api/search');
+      final url = Uri.parse('$baseUrl/stats');
+      final response = await http.get(url).timeout(const Duration(seconds: 5));
+
+      if (response.statusCode == 200) {
+        return jsonDecode(utf8.decode(response.bodyBytes));
+      } else {
+        throw Exception('Impossible de récupérer les statistiques');
+      }
+    } catch (e) {
+      throw Exception('Erreur stats : $e');
+    }
+  }
+
+  // Synchroniser les feedbacks
+  Future<void> syncFeedbacks(List<Map<String, dynamic>> feedbacks) async {
+    try {
+      final url = Uri.parse('$baseUrl/analytics/sync-feedbacks');
+
+      debugPrint(
+        '👍 [SYNC] Tentative de sync de ${feedbacks.length} feedbacks',
+      );
+
+      final body = jsonEncode({
+        'data': feedbacks,
+        'synced_at': DateTime.now().toIso8601String(),
+      });
 
       final response = await http
           .post(
             url,
-            headers: {'Content-Type': 'application/json'},
-            body: jsonEncode({'query': query, 'top_k': 3}),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: body,
           )
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 30));
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final results = data['results'] as List;
+      debugPrint('👍 [SYNC] Status: ${response.statusCode}');
+      debugPrint('👍 [SYNC] Body: ${response.body}');
 
-        return results.map((r) => r['preview'] as String).toList();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = jsonDecode(utf8.decode(response.bodyBytes));
+        debugPrint(
+          '✅ [SYNC] Feedbacks: ${responseData['inserted']}/${responseData['total']} synchronisés',
+        );
       } else {
-        return [];
+        debugPrint('❌ [SYNC] Erreur ${response.statusCode}: ${response.body}');
+        throw Exception('Erreur sync feedbacks (${response.statusCode})');
       }
     } catch (e) {
-      debugPrint('Erreur recherche: $e');
-      return [];
+      debugPrint('❌ [SYNC] Exception feedbacks: $e');
+      throw Exception('Erreur sync feedbacks : $e');
     }
   }
+
+  /// Tester la connectivité
+  Future<bool> testConnection() async {
+    try {
+      await checkHealth();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  String getBaseUrl() => baseUrl;
 }

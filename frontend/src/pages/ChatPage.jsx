@@ -12,15 +12,12 @@ import {
   Package,
   XCircle,
 } from "lucide-react";
-import axios from "axios";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { useChatContext } from "../contextes/ChatContext";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+import { sendMessage } from "../services/api";
+import { useChatContext } from "../contextes/UseChatContext";
 
 const ChatPage = () => {
-  
   const { messages, addMessage, saveToHistory, updateMessageFeedback } =
     useChatContext();
 
@@ -66,28 +63,26 @@ const ChatPage = () => {
       timestamp: new Date(),
     };
 
-    // ✅ CORRECTION 2 : Utiliser addMessage du Context (pas setMessages)
     addMessage(userMessage);
     setInput("");
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/chat`, { question });
+      // 🆕 Utiliser le service API au lieu d'axios direct
+      const response = await sendMessage(question);
 
       const assistantMessage = {
         id: Date.now() + 1,
         type: "assistant",
-        content: response.data.answer || "Je n'ai pas pu récupérer de réponse.",
-        sources: response.data.sources,
-        timestamp: response.data.timestamp
-          ? new Date(response.data.timestamp)
+        content: response.answer || "Je n'ai pas pu récupérer de réponse.",
+        sources: response.sources || [],
+        timestamp: response.timestamp
+          ? new Date(response.timestamp)
           : new Date(),
         feedback: null,
       };
 
-      // ✅ CORRECTION 3 : Utiliser addMessage du Context
       addMessage(assistantMessage);
-      // ✅ CORRECTION 4 : Utiliser saveToHistory du Context
       saveToHistory(userMessage, assistantMessage);
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
@@ -105,11 +100,7 @@ const ChatPage = () => {
     }
   };
 
-  // ✅ CORRECTION 5 : SUPPRIMER cette fonction locale (elle est dans le Context)
-  // La fonction saveToHistory est déjà fournie par le Context
-
   const handleFeedback = (messageId, feedback) => {
-    // ✅ CORRECTION 6 : Utiliser updateMessageFeedback du Context
     updateMessageFeedback(messageId, feedback);
   };
 
