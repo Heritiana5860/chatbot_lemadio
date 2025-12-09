@@ -67,68 +67,6 @@ class MessageBubble extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      if (message.sources.isNotEmpty) ...[
-                        const SizedBox(height: 12),
-                        const Divider(color: AppColors.borderLight, height: 1),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.description,
-                              size: 14,
-                              color: AppColors.primary,
-                            ),
-                            const SizedBox(width: 6),
-                            const Text(
-                              'Sources :',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.textSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: message.sources
-                              .map(
-                                (source) => Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 6,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        AppColors.primary.withValues(
-                                          alpha: 0.1,
-                                        ),
-                                        AppColors.accent.withValues(alpha: 0.1),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: AppColors.primary.withValues(
-                                        alpha: 0.2,
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    '📄 $source',
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.primary,
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ],
                     ],
                   ),
                 ),

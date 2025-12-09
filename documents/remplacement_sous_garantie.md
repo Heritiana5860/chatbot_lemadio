@@ -1,65 +1,68 @@
-# Remplacement sous Garantie dans Lemadio (3 ans)
+# Page Remplacement sous Garantie
 
-**Mots-clés** : remplacement garantie, réchaud défectueux, changer réchaud, argile fissurée, garantie 3 ans, accord responsable, ancien réchaud, nouveau réchaud, grille gratuite
+Ce guide explique comment effectuer un remplacement de réchaud défectueux dans les conditions de la garantie ADES (3 ans).
 
-## Conditions d’éligibilité – Résumé clair
+## 1\. Conditions d'éligibilité au remplacement
 
-| Condition                                   | Remplacement possible ?                     |
-|---------------------------------------------|---------------------------------------------|
-| Vente de **moins de 3 ans**                 | Oui                                         |
-| Vente de **plus de 3 ans**                  | Non – garantie expirée (bloqué par l’appli) |
-| Problème sur **l’argile** (fissure, trou, défaut cuisson) | Oui                                  |
-| Mauvaise utilisation (coup, chute, modification) | Non                                   |
-| Grilles supplémentaires                    | Oui – gratuites avec le reçu                |
+**Question fréquente :** « Mon client a un réchaud abîmé, puis-je le changer sous garantie ? »
 
-**Règle système** : si la vente > 3 ans → l’application refuse automatiquement.
+**Réponse courte :** Oui, **uniquement si** :
 
-## Procédure complète pas à pas
+- La vente initiale date de **moins de 3 ans**
+- Le problème concerne **l'argile** (corps du réchaud)
+- Il n'y a **pas de mauvaise utilisation évidente** (coup, chute, usage abusif)
 
-1. Va dans l’onglet **Remplacement sous Garantie**  
-2. Tape le **numéro de facture** d’origine → clique la loupe  
-3. Si éligible → la liste des réchauds vendus apparaît  
-4. Sélectionne l’**ancien réchaud** à remplacer  
-5. Scanne le **nouveau réchaud** à remettre (icône caméra)  
-6. Écris le **motif précis** (ex : « argile fissurée », « trou dans le corps », « défaut de cuisson »)  
-7. **Obligatoire** : obtiens l’accord de ton **responsable de centre** (oral ou écrit)  
-8. Clique **Valider** → remplacement enregistré avec succès
+### Conditions générales de garantie ADES
 
-**Résultat** :  
-- L’ancien réchaud sort du suivi client  
-- Le nouveau réchaud prend le relais sous garantie
+| **Élément**                 | **Couvert par la garantie ?**            |
+| --------------------------- | ---------------------------------------- |
+| Durée                       | 3 ans à partir de la date de vente       |
+| Corps en argile             | Oui (fissures, défaut de fabrication)    |
+| Mauvaise utilisation / abus | Non (coup, chute, modification, etc.)    |
+| .Grilles supplémentaires    | Oui - gratuites sur présentation du reçu |
+| Certificats CO              | Restent la propriété d'ADES              |
 
-## Point de contrôle OBLIGATOIRE avant Valider
-Tu **dois absolument** avoir l’accord de ton responsable de centre.  
-Il peut demander des photos ou un contrôle physique du réchaud défectueux.
+**Règle système** : L'application bloque automatiquement le remplacement si la vente a plus de 3 ans.
 
-## Résumé ultra-rapide
-Remplacement = facture < 3 ans + problème argile + accord responsable → scan ancien + scan nouveau → Valider.
+## 2\. Procédure complète dans l'application
 
-## Réponses types prêtes à l’emploi
+- Allez à la page **« Remplacement sous Garantie »**
+- Dans le champ **Numéro de Facture**, saisissez le numéro d'origine → cliquez sur l'icône recherche
+- Si la facture est trouvée et éligible (< 3 ans), la liste des réchauds vendus apparaît
+- Sélectionnez le **réchaud à remplacer** (ancien réchaud) → Le champ **Ancien Réchaud** se remplit automatiquement
+- Scannez le **nouveau réchaud** à remettre au client (icône caméra) → Le champ **Nouveau Réchaud** se remplit automatiquement
+- Saisissez le **motif précis** du remplacement (ex : « argile fissurée », « défaut de cuisson », « trou dans le corps »)
+- **Obligation** : Obtenez l'accord oral ou écrit de votre **responsable de centre** avant de continuer
+- Cliquez sur **Valider** → le remplacement est enregistré, l'ancien réchaud sort du suivi client, le nouveau prend le relais sous garantie
 
-**Question** : Comment faire un remplacement sous garantie ?  
-**Réponse** : Voici la procédure exacte :  
-1. Onglet **Remplacement sous Garantie**  
-2. Tape le numéro de facture → recherche  
-3. Choisis l’ancien réchaud  
-4. Scanne le nouveau  
-5. Écris le motif (ex : argile fissurée)  
-6. **Obligatoire** : accord de ton responsable  
-7. Valider → c’est bon !  
+## 3\. Point de contrôle obligatoire
 
-**Question** : Mon client a un réchaud cassé, je peux le changer ?  
-**Réponse** : Oui, uniquement si :  
-• La vente a **moins de 3 ans**  
-• Problème sur l’**argile** (pas de coup ou chute)  
-• Tu as l’**accord de ton responsable**  
-Sinon, c’est refusé.
+**Avant de cliquer sur « Valider »**, vous **devez absolument** : → Avoir discuté du cas avec votre **responsable de centre** et obtenu son accord. Le responsable peut exiger des photos ou un contrôle physique du réchaud défectueux.
 
-**Question** : L’appli dit que la garantie est expirée  
-**Réponse** : Si la vente a plus de 3 ans, la garantie est terminée. Aucun remplacement possible via l’application. Tu peux proposer une vente avec réduction, mais plus sous garantie.
+## Réponses recommandées de l'Assistant Lemadio
 
-**Question** : Est-ce que je peux remplacer sans l’accord du responsable ?  
-**Réponse** : Non, jamais. L’accord du responsable est obligatoire avant de cliquer sur Valider.
+**Q :** Comment faire un remplacement sous garantie ?
 
-**Question** : Les grilles sont garanties ?  
-**Réponse** : Non, mais les grilles supplémentaires sont remises **gratuitement** sur simple présentation du reçu de vente.
+**R :** Allez dans **Remplacement sous Garantie** → tapez le numéro de facture → choisissez l'ancien réchaud → scannez le nouveau → écrivez le motif → obtenez l'accord de votre responsable → Valider.
+
+**Q :** Mon client a un réchaud cassé, est-ce que je peux le changer ?
+
+**R :** Oui, si :
+
+• La vente a moins de 3 ans
+
+• Le problème vient de l'argile (pas de mauvaise utilisation)
+
+• Vous avez l'accord de votre responsable de centre Sinon, le remplacement sera refusé.
+
+**Q :** L'application dit que la facture a plus de 3 ans, que faire ?
+
+**R :** La garantie est expirée. Aucun remplacement possible via l'application. Proposez éventuellement une vente avec réduction, mais plus sous garantie.
+
+**Q :** Est-ce que je peux remplacer sans l'accord du responsable ?
+
+**R :** Non. L'accord du responsable est obligatoire avant de cliquer sur « Valider ».
+
+**Q :** Les grilles sont-elles garanties ?
+
+**R :** Non, mais les grilles supplémentaires sont remises gratuitement sur présentation du reçu de vente.

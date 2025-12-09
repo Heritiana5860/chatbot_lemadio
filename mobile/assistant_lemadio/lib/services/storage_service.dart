@@ -368,20 +368,90 @@ class StorageService {
   }
 
   // FAQ
-
   Future<String?> getFaqAnswer(String question) async {
     final db = await database;
-    final questionLower = question.toLowerCase();
+    final questionLower = question.toLowerCase().trim();
     final faqs = await db.query('faq');
 
-    for (final faq in faqs) {
-      final keywords = (faq['keywords'] as String).toLowerCase().split(',');
-      if (keywords.any((keyword) => questionLower.contains(keyword.trim()))) {
-        return faq['answer'] as String;
+    debugPrint('');
+    debugPrint('🔍 RECHERCHE FAQ');
+    debugPrint('Question: "$question"');
+    debugPrint('Question (lowercase): "$questionLower"');
+    debugPrint('Nombre de FAQs: ${faqs.length}');
+    debugPrint('───────────────────────────────────────');
+
+    if (faqs.isEmpty) {
+      debugPrint('⚠️ ERREUR: Aucune FAQ dans la base !');
+      return null;
+    }
+
+    for (var i = 0; i < faqs.length; i++) {
+      final faq = faqs[i];
+      final faqKeywordsRaw = faq['keywords'] as String;
+
+      // ✅ CORRECTION: Décoder le JSON au lieu de split(',')
+      List<String> keywords;
+      try {
+        // Les keywords sont stockés en JSON: ["vente","créer","nouvelle"]
+        final decoded = jsonDecode(faqKeywordsRaw);
+        keywords = List<String>.from(decoded);
+      } catch (e) {
+        // Fallback: si ce n'est pas du JSON, utiliser split
+        keywords = faqKeywordsRaw.split(',');
+      }
+
+      debugPrint('');
+      debugPrint('Test FAQ #${i + 1}: ${faq['question']}');
+      debugPrint('  Keywords bruts: "$faqKeywordsRaw"');
+      debugPrint('  Keywords décodés: $keywords');
+
+      // Vérifier chaque mot-clé
+      for (final keyword in keywords) {
+        final keywordTrimmed = keyword.toLowerCase().trim();
+        final match = questionLower.contains(keywordTrimmed);
+
+        debugPrint('    - "$keywordTrimmed" → ${match ? "✅ MATCH" : "❌"}');
+
+        if (match) {
+          debugPrint('');
+          debugPrint('✅ FAQ TROUVÉE !');
+          debugPrint('Question FAQ: ${faq['question']}');
+          return faq['answer'] as String;
+        }
       }
     }
+
+    debugPrint('');
+    debugPrint('❌ Aucune FAQ correspondante trouvée');
     return null;
   }
+
+  // Future<void> debugFaqs() async {
+  //   final db = await database;
+  //   final faqs = await db.query('faq');
+
+  //   debugPrint('═══════════════════════════════════════');
+  //   debugPrint('🔍 DEBUG FAQs - Total: ${faqs.length} FAQs');
+  //   debugPrint('═══════════════════════════════════════');
+
+  //   if (faqs.isEmpty) {
+  //     debugPrint('⚠️ AUCUNE FAQ TROUVÉE - La base est vide !');
+  //     debugPrint('💡 Solution: Réinitialiser la base de données');
+  //   } else {
+  //     for (var i = 0; i < faqs.length; i++) {
+  //       final faq = faqs[i];
+  //       debugPrint('');
+  //       debugPrint('FAQ #${i + 1}:');
+  //       debugPrint('  Question: ${faq['question']}');
+  //       debugPrint('  Keywords: ${faq['keywords']}');
+  //       debugPrint(
+  //         '  Answer (50 premiers chars): ${(faq['answer'] as String).substring(0, 50)}...',
+  //       );
+  //     }
+  //   }
+
+  //   debugPrint('═══════════════════════════════════════');
+  // }
 
   Future<void> addFaq(String question, String answer, String keywords) async {
     final db = await database;

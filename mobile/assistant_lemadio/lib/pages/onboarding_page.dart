@@ -40,9 +40,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
       // Sauvegarder le centre sélectionné
       await storageService.saveSalesCenter(_selectedCenter!.name);
-      debugPrint(
-        'Centre de vente sélectionné : ${_selectedCenter!.name}',
-      );
+      debugPrint('Centre de vente sélectionné : ${_selectedCenter!.name}');
 
       // Marquer l'onboarding comme complété
       await storageService.setOnboardingCompleted(true);

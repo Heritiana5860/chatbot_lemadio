@@ -1,65 +1,74 @@
-# Connexion et Authentification dans Lemadio
+# Authentification dans l'Application Lemadio
 
-**Mots-clés** : connexion, se connecter, mot de passe oublié, première connexion, réinitialiser mot de passe, déconnexion, code confirmation, hors ligne
+Ce guide explique le processus de connexion, la gestion des identifiants et la réinitialisation du mot de passe.
 
-## Règles de connexion – Résumé clair
+## Fonctionnement de la connexion
 
-| Situation                                   | Internet requis ? | Que saisir ?                        |
-|---------------------------------------------|-------------------|-------------------------------------|
-| 1ère connexion ou après réinstallation     | Oui (obligatoire) | Nom d’utilisateur + Mot de passe   |
-| Connexions suivantes                        | Non (hors ligne OK) | Mot de passe uniquement           |
-| Changer de compte vendeur                   | Impossible        | L’appareil reste lié au 1er compte |
+| **Situation**                                                  | **Connexion Internet requise ?** | **Champs à saisir**              | **Remarques**                                                           |
+| -------------------------------------------------------------- | -------------------------------- | -------------------------------- | ----------------------------------------------------------------------- |
+| **1ère connexion** (nouveau téléphone ou après réinstallation) | Oui (obligatoire)                | Nom d'utilisateur + Mot de passe | Validation auprès du serveur. Le nom d'utilisateur est ensuite mémorisé |
+| **Connexions suivantes**                                       | Non (mode hors-ligne possible)   | Mot de passe uniquement          | Nom d'utilisateur pré-rempli                                            |
+| **Changement de compte vendeur**                               | Impossible localement            | -                                | L'appareil reste lié au premier compte connecté avec succès             |
 
-**Nom d’utilisateur** = généralement **Vente + Nom du centre**  
-Exemples : `Vente Fianarantsoa`, `Vente Antananarivo`, `Vente Toamasina`
+## Qui fournit les identifiants ?
 
-## Connexion classique (après la 1ère fois)
+- Vos identifiants (Nom d'utilisateur + Mot de passe initial) sont fournis par **l'équipe IT / administrateur ADES**.
 
-1. Le **nom d’utilisateur** est déjà pré-rempli  
-2. Tape ton **mot de passe**  
-3. Clique sur **Se connecter**  
-→ Tu arrives directement sur la page Ventes (même sans réseau)
+### Format du Nom d'utilisateur
 
-## Première connexion ou après réinstallation
+Généralement : **Vente + Nom du centre**
 
-Internet obligatoire la première fois pour valider tes identifiants.
+Exemple : Vente Fianarantsoa, Vente Antananarivo, Vente Toamasina
 
-## Mot de passe oublié ? → Procédure complète
+## Page de connexion - Éléments clés
 
-1. Sur la page de connexion → clique **Mot de passe oublié ?**  
-2. Sélectionne ton **centre de vente**  
-3. Entre ton **nouveau mot de passe** → Valider  
-4. Un code de confirmation est envoyé par mail à l’équipe IT  
-5. **Contacte immédiatement** ton responsable ou l’administrateur pour récupérer ce code  
-6. Saisis le code dans l’appli (valable **10 minutes seulement**)  
-→ Mot de passe changé avec succès
+- Logo ADES (en haut)
+- Champ **Nom d'utilisateur** (pré-rempli après la 1ère connexion)
+- Champ **Mot de passe** (icône œil pour afficher/masquer)
+- Bouton **Se connecter**
+- Lien **Mot de passe oublié ?**
 
-## Déconnexion
+## Procédure - Mot de passe oublié
 
-1. Clique sur les **trois points verticaux** en haut à droite (près de ton nom)  
-2. Choisis **Déconnexion**  
-3. Confirme avec **Oui** → retour à l’écran de connexion
+- Sur la page de connexion → cliquez sur **« Mot de passe oublié ? »**
+- Dans la fenêtre qui s'ouvre :
+  - Sélectionnez votre **centre de vente**
+  - Saisissez votre **nouveau mot de passe**
+  - Validez
+- Un **code de confirmation** est envoyé automatiquement par e-mail à l'équipe IT
+- **Contactez immédiatement l'administrateur** pour obtenir ce code
+- Saisissez le code dans l'application
+- Votre mot de passe est changé
 
-## Résumé ultra-rapide
-- 1ère connexion → Internet + nom d’utilisateur + mot de passe  
-- Ensuite → mot de passe seul (même sans réseau)  
-- Mot de passe oublié → lien dédié + code admin (10 min)
+**Attention** : Le code est valable **10 minutes seulement**.
 
-## Réponses types prêtes à l’emploi
+## Étapes simples pour se connecter (connexion standard)
 
-**Question** : Je n’arrive pas à me connecter  
-**Réponse** :  
-- C’est ta **première connexion** ou après réinstallation ? → il te faut Internet la première fois.  
-- Sinon, vérifie simplement ton mot de passe (le nom d’utilisateur est déjà écrit).  
-Toujours bloqué ? Contacte ton responsable de centre.
+- Saisir (ou vérifier) le **Nom d'utilisateur**
+- Saisir le **Mot de passe**
+- Cliquer sur **Se connecter**
 
-**Question** : Mot de passe oublié / Comment le changer ?  
-**Réponse** :  
-Voici la procédure exacte :  
-1. Page de connexion → **Mot de passe oublié ?**  
-2. Choisis ton centre → tape ton nouveau mot de passe  
-3. Contacte **immédiatement** ton responsable ou l’administrateur pour récupérer le code de confirmation (valable 10 minutes seulement)  
-4. Entre le code → c’est bon !
+## Déconnexion de l'application
 
-**Question** : Je peux me connecter sans réseau ?  
-**Réponse** : Oui, dès la deuxième connexion ! Seule la toute première fois nécessite Internet.
+- Cliquez sur les **trois points verticaux** en haut à droite (près de votre nom)
+- Choisissez **Déconnexion**
+- Confirmez en cliquant sur **Oui** → Vous êtes redirigé vers la page de connexion
+
+## Réponse recommandée de l'Assistant Lemadio
+
+Quand l'utilisateur demande : « Je n'arrive pas à me connecter », « Mot de passe oublié », « Comment changer mon mot de passe ? »
+
+**Assistant :**
+
+- Si c'est votre première connexion ou après réinstallation → vous avez besoin d'Internet.
+- Connexions suivantes → mot de passe uniquement (même sans réseau).
+
+**Mot de passe oublié ?**
+
+- Sur la page de connexion → « Mot de passe oublié ? »
+- Choisissez votre centre → entrez le nouveau mot de passe → Valider
+- Contactez immédiatement l'administrateur pour obtenir le code de confirmation (valable 10 min seulement).
+
+**Problème persistant ?**
+
+Contactez votre responsable de centre ou l'équipe IT.

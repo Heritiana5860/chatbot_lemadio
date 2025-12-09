@@ -1,47 +1,32 @@
-# Annulation d’une Vente dans Lemadio
+# Annulation d'une Vente dans Lemadio
 
-**Mots-clés** : annuler vente, supprimer vente, erreur vente, annulation impossible, réchaud revient stock, libérer facture, motif annulation
+Ce guide explique comment annuler une vente enregistrée dans l'application Lemadio.
 
-## Procédure complète d’annulation (uniquement le jour même !)
+## Procédure d'annulation (depuis l'application mobile)
 
-1. Va sur la page **Ventes**  
-2. Trouve la carte de la vente que tu veux annuler  
-3. Clique directement sur le bouton rouge **Annuler** sur la carte  
-4. L’appli récupère automatiquement les réchauds + le numéro de facture  
-5. Tape le **motif précis** de l’annulation (champ obligatoire)  
-6. Clique sur **Valider**
+- Ouvrez la **Page des ventes**
+- Repérez la **carte de la vente** concernée
+- Cliquez sur le bouton **« Annuler »** présent sur cette carte
+- L'application récupère automatiquement :
+  - Le(s) numéro(s) de réchaud
+  - Le numéro de facture associé
+- Saisissez le **motif précis** de l'annulation (champ obligatoire)
+- Cliquez sur **« Valider »** pour confirmer
 
-→ Résultat immédiat :  
-- La vente est supprimée  
-- Les réchauds reviennent dans ton stock (cadre vert)  
-- La facture est libérée et réutilisable
+→ La vente est annulée immédiatement, les réchauds reviennent dans votre stock et la facture est libérée.
 
-## Restriction très importante – Délai d’annulation
+## Restriction importante - Délai d'annulation
 
-| Situation                                   | Possible depuis l’appli ?                    | Que faire                                      |
-|---------------------------------------------|----------------------------------------------|------------------------------------------------|
-| Annulation **le même jour** que la vente    | Oui                                          | Suivre la procédure ci-dessus                  |
-| Annulation **à partir du lendemain**        | Non – impossible                             | Contacter immédiatement ton responsable de centre ou l’administrateur |
+| **Condition**                                           | **Action possible**                                                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Annulation **le même jour** que la création de la vente | Annulation directe depuis l'application mobile                                                                                 |
+| À partir du **lendemain** de la vente                   | Annulation impossible depuis l'application → contacter obligatoirement votre **responsable de centre** ou l'**administrateur** |
 
-## Résumé ultra-rapide
-Une vente ne peut être annulée que **le jour même**.  
-Passé ce délai → contacter le responsable.
+## Réponse recommandée de l'Assistant Lemadio
 
-## Réponses types prêtes à l’emploi
+Quand l'utilisateur demande : « Comment annuler une vente ? » ou « J'ai fait une erreur sur une vente »
 
-**Question** : Comment annuler une vente ? / J’ai fait une erreur  
-**Réponse** : Tu peux annuler une vente **uniquement le jour même** de sa création.  
-Voici comment faire :  
-1. Page Ventes → trouve la carte  
-2. Clique sur **Annuler**  
-3. Indique le motif  
-4. Valider  
-Les réchauds reviennent dans ton stock et la facture est libérée.  
-Si c’est le lendemain ou plus tard, ce n’est plus possible dans l’appli → contacte tout de suite ton responsable de centre.
+**Assistant :** Vous pouvez annuler une vente **uniquement le jour même** de sa création.
 
-**Question** : Je veux annuler une vente d’hier  
-**Réponse** : Désolé, l’annulation n’est possible que le jour même de la vente.  
-À partir du lendemain, il faut obligatoirement contacter ton responsable de centre ou l’administrateur pour qu’ils le fassent depuis le back-office.
-
-**Question** : Après annulation, est-ce que les réchauds reviennent dans mon stock ?  
-**Réponse** : Oui, absolument ! Dès que tu valides l’annulation, les réchauds réapparaissent en vert dans ton stock et la facture est de nouveau disponible.
+- Si vous êtes encore le **jour de la vente** : Allez sur la page Ventes → trouvez la carte de la vente → cliquez sur **« Annuler »** → indiquez le motif → **Valider**.
+- Si nous sommes **le lendemain ou plus tard**, l'annulation n'est plus possible depuis l'application. Merci de contacter immédiatement votre **responsable de centre** ou l'administrateur.

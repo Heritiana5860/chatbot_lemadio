@@ -36,6 +36,9 @@ class ChatProvider with ChangeNotifier {
   Future<void> _init() async {
     await _loadMessages();
 
+    // 🔍 DEBUG: Vérifier les FAQs
+    // await _storageService.debugFaqs();
+
     // Message de bienvenue si aucun message
     if (_messages.isEmpty) {
       _messages.add(Message.welcome());
@@ -116,22 +119,47 @@ class ChatProvider with ChangeNotifier {
         _messages.add(assistantMessage);
         await _storageService.saveToHistory(userMessage, assistantMessage);
 
-        // 🆕 SYNCHRONISER IMMÉDIATEMENT L'HISTORIQUE
-        Future.delayed(const Duration(milliseconds: 500), () {
-          syncAnalytics();
-        });
+        if (_connectivityService.isConnected) {
+          debugPrint('📊 Synchronisation immédiate de l\'historique...');
+          // Attendre un peu pour laisser la DB sauvegarder
+          Future.delayed(const Duration(milliseconds: 500), () {
+            syncAnalytics();
+          });
+        }
       } else {
         // 📵 MODE HORS LIGNE
         final faqAnswer = await _storageService.getFaqAnswer(text);
 
-        final assistantMessage = Message.offline(faqAnswer);
-        _messages.add(assistantMessage);
+        Message assistantMessage;
 
-        if (faqAnswer == null) {
+        if (faqAnswer != null) {
+          // ✅ FAQ trouvée - Répondre avec la FAQ
+          assistantMessage = Message(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            content: faqAnswer,
+            isUser: false,
+            timestamp: DateTime.now(),
+            sources: ['FAQ Locale'], // Indiquer que c'est une FAQ
+          );
+          debugPrint('✅ Réponse FAQ trouvée hors ligne');
+        } else {
+          // ❌ Pas de FAQ - Message d'attente
+          assistantMessage = Message(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            content:
+                '📵 Vous êtes hors ligne et je n\'ai pas trouvé de réponse dans les FAQ. '
+                'Votre question sera traitée dès que vous serez reconnecté à internet.',
+            isUser: false,
+            timestamp: DateTime.now(),
+            sources: [],
+          );
+
+          // Sauvegarder la question pour synchronisation ultérieure
           await _storageService.savePendingQuestion(userMessage);
           debugPrint('📥 Question sauvegardée pour synchronisation ultérieure');
         }
 
+        _messages.add(assistantMessage);
         await _storageService.saveToHistory(userMessage, assistantMessage);
       }
     } catch (e) {
@@ -143,6 +171,7 @@ class ChatProvider with ChangeNotifier {
       );
       _messages.add(errorMessage);
 
+      // Sauvegarder en attente en cas d'erreur réseau
       if (e.toString().contains('connexion') ||
           e.toString().contains('timeout')) {
         await _storageService.savePendingQuestion(userMessage);
@@ -225,7 +254,10 @@ class ChatProvider with ChangeNotifier {
 
   /// SYNCHRONISATION AUTOMATIQUE DE L'HISTORIQUE ANALYTICS
   Future<void> syncAnalytics() async {
-    if (_isSyncing) return;
+    if (_isSyncing) {
+      debugPrint('⏳ Sync déjà en cours, cette tentative sera ignorée');
+      return;
+    }
 
     final isConnected = _connectivityService.isConnected;
     if (!isConnected) {
@@ -273,6 +305,10 @@ class ChatProvider with ChangeNotifier {
       }
     } catch (e) {
       debugPrint('❌ Erreur sync: $e');
+    } finally {
+      _isSyncing = false;
+      // ✅ NOUVEAU : Notifier les listeners que la sync est terminée
+      notifyListeners();
     }
   }
 

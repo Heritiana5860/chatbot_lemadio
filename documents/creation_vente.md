@@ -1,85 +1,111 @@
-# Création d’une Vente dans Lemadio – Guide Complet
+# Création d'une Vente dans Lemadio
 
-**Mots-clés** : créer vente, nouvelle vente, vente directe, vente revendeur, approvisionnement, comment faire une vente
+**Vente Directe (client final) et Vente Revendeur (approvisionnement ADES)**
+
+Ce guide détaille les deux types de vente possibles dans l'application Lemadio.
 
 ## Point de départ commun
-Après connexion, tu arrives directement sur la page **Ventes**.
 
-**Pour démarrer une nouvelle vente** → clique sur le **bouton rond vert avec le +** en bas à droite.
+Après une connexion réussie, la **page des ventes** s'ouvre automatiquement.
 
-Deux choix s’affichent :
-- Vente Directe → vente à un client final
-- Vente Revendeur → approvisionnement d’un revendeur ADES
+### Démarrer une nouvelle vente
 
-## 1. Vente Directe (Client Final) – Étapes détaillées
+- Cliquez sur le **bouton rond vert « + »** (en haut à droite de la barre de navigation inférieure).
+- Deux options apparaissent :
+  - **Vente Revendeur** → Approvisionnement d'un revendeur ADES
+  - **Vente Directe** → Vente à un client final
 
-**Flux complet** : Informations client → N° facture → Vérification → Scan réchauds → Conditions & signature → Enregistré
+### Réponse recommandée de l'Assistant Lemadio
 
-### Étape 1 – Saisie des informations client (champs obligatoires sauf CIN)
-- Catégorie : Private / Hôtel / École / ONG / Restaurant / Hôpital / Microbusiness / Prison  
-- Cluster (type de réchaud) : Charcoal / Wood / Solar + OLI-b / Solar + OLI-c  
-- Civilité : Mme / Mr  
-- Nom + Prénom (ou surnom)  
-- Téléphone  
-- Adresse complète  
-- Géolocalisation : clique l’icône GPS → position automatique ou déplace le marqueur rouge  
-- CIN (facultatif) : photo recto + verso
+Lorsque l'utilisateur demande : « Comment créer une vente ? » ou « Je veux faire une vente »
 
-→ Valider
+→ **Assistant :** Pour vous aider au mieux, précisez svp le type de vente souhaité :
 
-### Étape 2 – Choix du numéro de facture
-Recherche et sélection d’un seul numéro disponible → Valider
+- Une **Vente Directe** (client final)
+- Une **Vente Revendeur** (approvisionnement d'un revendeur ADES)
 
-### Étape 3 – Récapitulatif client
-Vérifie tout avec le client → bouton Retour si besoin → Valider
+## 1\. Processus - Vente Directe (Client Final)
 
-### Étape 4 – Scan des réchauds
-1. Clique le boutob dans le cadre jaune « Scanner »
-2. Scanne chaque code-barres
-3. Le réchaud doit être dans ton stock local
-4. Prix automatique selon la zone du client (Zone riche / Moyenne / LNOB)
-5. Tableau récapitulatif (Type / Prix unitaire / Quantité / Total) → Valider
+### Schéma du flux
 
-### Étape 5 – Conditions de garantie & signature
-1. Le client lit les conditions (garantie 3 ans, exclusions, grilles gratuites, certificat CO)
-2. Cocher « J’accepte de céder le droit de ce dossier »
-3. Signature sur le pad (icône poubelle pour effacer)
-→ Enregistrer → Vente terminée avec succès
+Page Ventes → Informations Client → Sélection Facture → Vérification Client → Scan Réchaud(s) → Conditions & Signature → Enregistrer
 
-## 2. Vente Revendeur (Approvisionnement ADES) – Étapes rapides
+### Étape 1 - Informations Client (tous les champs obligatoires sauf CIN)
 
-**Flux** : N° facture → Choix du revendeur → Scan réchauds → Conditions & signature → Enregistré
+- **Catégorie** : Private / Hotel / Ecole / NGO / Restaurant / Hopital / Microbusiness / Prison
+- **Cluster** (type de réchaud vendu) : Charcoal / Wood / Solar + OLI-b / Solar + OLI-c
+- **Identité** : Civilité (Mme/Mr), Nom, Prénom (surnom), Contact (téléphone), Adresse complète
+- **Localisation** : - Cliquez sur l'icône de géolocalisation → carte OpenStreetMap - Position actuelle récupérée automatiquement - Possibilité de recherche manuelle (Fokontany, Région…) - Placer le marqueur rouge à l'emplacement exact - Corriger manuellement les champs si « Non spécifié » apparaît
+- **CIN** (facultatif) : photo recto + verso → Cliquez sur **Valider**
 
-1. Sélectionne un numéro de facture disponible → Valider
-2. Choisis le revendeur dans la liste de ton centre → Valider
-3. Scan des réchauds (identique à la vente directe)
-4. Conditions & signature (identique à la vente directe)
-→ Vente enregistrée
+### Étape 2 - Sélection du numéro de facture
 
-## Synchronisation des ventes (très important)
+- Choisir **un seul** numéro de facture disponible (filtre via barre de recherche) → **Valider**
 
-| Statut                  | Description                                      | Indicateur                     |
-|-------------------------|--------------------------------------------------|--------------------------------|
-| Synchronisée            | Enregistrée localement + envoyée sur Salesforce  | Carte verte + « Synchronisé » |
-| Non synchronisée (hors ligne) | Enregistrée localement seulement            | Carte orange + badge Ventes   |
+### Étape 3 - Vérification des informations client
 
-**Pour synchroniser manuellement** :
-1. Connexion internet
-2. Page Ventes
-3. Menu ⋮ → Synchroniser
+- Récapitulatif complet des données saisies
+- Confirmer avec le client
+- Bouton retour si correction nécessaire → **Valider**
 
-## Liste complète des modèles de réchauds ADES
+### Étape 4 - Scan des réchauds
 
-| Modèle     | Combustible | Taille      | Description               |
-|------------|-------------|-------------|---------------------------|
-| OLI-c      | Charbon     | Petit       |                           |
-| OLI-b      | Bois        | Petit       |                           |
-| OLI-45c    | Charbon     | Moyen       |                           |
-| OLI-45b    | Bois        | Moyen       |                           |
-| OLI-60c    | Charbon     | Grand       |                           |
-| OLI-60b    | Bois        | Grand       |                           |
-| Box        | Multifonction | -         |                           |
-| Parabole   | Solaire     | -           | Réflecteur solaire        |
+- Cliquez sur le bouton scanner (cadre jaune)
+- Scanner le code-barres de chaque réchaud
+- Vérification automatique : le réchaud doit être présent dans votre stock local
+- Association **prix + zone géographique** du client :
+  - Zone riche / Zone moyenne / Zone LNOB
+  - Prix unitaire adapté au type de réchaud + zone
+- Tableau récapitulatif (Type, Prix unitaire, Quantité, Total) → **Valider**
 
-**Résumé ultra-rapide pour l’assistant** :
-Pour créer une vente → bouton + vert → choisir Vente Directe ou Revendeur → remplir les étapes → scanner → signature → terminé.
+### Étape 5 - Conditions de garantie & Signature
+
+- Lecture des conditions de garantie (3 ans, exclusions, grilles supplémentaires gratuites, certificats CO propriété ADES)
+- Cocher « J'accepte de céder le droit de ce dossier »
+- Signature du client sur le pad (icône poubelle pour effacer) → **Enregistrer** → vente finalisée
+
+## 2\. Processus - Vente Revendeur (Approvisionnement ADES)
+
+### Schéma du flux
+
+Page Ventes → Sélection Facture → Sélection Revendeur → Scan Réchaud(s) → Conditions & Signature → Enregistrer
+
+### Étape 1 - Sélection du numéro de facture
+
+- Choisir un numéro disponible → **Valider**
+
+### Étape 2 - Sélection du revendeur
+
+- Liste des revendeurs rattachés au centre de vente
+- Sélectionner le revendeur concerné → **Valider**
+
+### Étape 3 - Scan des réchauds
+
+### Étape 4 - Conditions & Signature
+
+## Gestion de la synchronisation
+
+| **Statut**             | **Description**                                     | **Indicateur**                                              |
+| ---------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
+| Vente synchronisée     | Enregistrée localement + envoyée sur Salesforce     | Carte verte « Synchronisé » - Réchaud marqué « vendu »      |
+| Vente non synchronisée | Enregistrée localement seulement (pas de connexion) | Carte orange « Non synchronisé » - Badge sur l'icône Ventes |
+
+### Synchronisation manuelle (ventes hors ligne)
+
+- Connexion Internet requise
+- Aller sur la page Ventes
+- Vérifier les cartes orange
+- Menu (trois points verticaux) → **Synchroniser**
+
+## Types de réchauds commercialisés par ADES
+
+| **Modèle** | **Combustible** | **Format / Description** |
+| ---------- | --------------- | ------------------------ |
+| OLI-c      | Charbon         | Petit format             |
+| OLI-b      | Bois            | Petit format             |
+| OLI-45c    | Charbon         | Moyen format             |
+| OLI-45b    | Bois            | Moyen format             |
+| OLI-60c    | Charbon         | Grand format             |
+| OLI-60b    | Bois            | Grand format             |
+| Box        | Multifonction   | -                        |
+| Parabole   | Solaire         | Réflecteur solaire       |

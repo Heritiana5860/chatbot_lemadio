@@ -27,7 +27,7 @@ void main() async {
   // Vérifier la connectivité initiale
   await connectivityService.checkConnectivity();
 
-  // 🆕 Vérifier si l'onboarding est complété
+  // Vérifier si l'onboarding est complété
   final onboardingCompleted = await storageService.isOnboardingCompleted();
 
   runApp(
@@ -35,7 +35,7 @@ void main() async {
       storageService: storageService,
       apiService: apiService,
       connectivityService: connectivityService,
-      showOnboarding: !onboardingCompleted, // 🆕
+      showOnboarding: !onboardingCompleted, 
     ),
   );
 }
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   final StorageService storageService;
   final ApiService apiService;
   final ConnectivityService connectivityService;
-  final bool showOnboarding; // 🆕
+  final bool showOnboarding; 
 
   const MyApp({
     super.key,

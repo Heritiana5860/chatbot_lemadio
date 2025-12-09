@@ -1,36 +1,39 @@
-# Page Analyse des Ventes – Répartition des Réchauds
+# Page d'Analyse des Ventes - Répartition des Réchauds
 
-**Mots-clés** : analyse, statistiques, répartition réchauds, camembert, pourcentage modèle, stock par modèle, OLI-c, OLI-60b, quel modèle le plus vendu, réapprovisionnement
+Ce tableau de bord montre la composition complète de votre stock de réchauds (vendus + disponibles) par modèle.
 
-## Comment accéder à la page Analyse ?
-Clique simplement sur l’icône **Analyse** (ou Statistiques) dans la barre de navigation en bas → tu arrives directement sur la grande charte colorée.
+## Accès rapide
 
-## Ce que montre cette page (très utile pour les responsables)
+Cliquez sur l'icône **Analyse** (ou **Statistiques**) dans la barre de navigation inférieure → vous arrivez directement sur la **charte de répartition**.
 
-| Indicateur                          | Description                                                                 | Utilité pratique                                           |
-|-------------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------|
-| Nombre total de réchauds            | Total de tous les réchauds reçus dans ton centre (vendus + encore en stock) | Voir la taille globale de ton activité depuis le début     |
-| Charte camembert / donut            | Répartition visuelle par modèle (OLI-c, OLI-b, OLI-45c, OLI-60b, Parabole…) | Identifier immédiatement les modèles dominants             |
-| Pourcentage + quantité par modèle   | Chaque segment affiche : Modèle → Quantité → % du total                    | Décider quoi commander en priorité au prochain réappro   |
+## Ce que vous voyez sur cette page
 
-**Important** : le total inclut **tous les réchauds depuis l’ouverture du centre** (vendus + restants). C’est l’historique complet.
+| **Indicateur**                            | **Description**                                                             | **Utilité pratique**                                                |
+| ----------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Nombre total de réchauds**              | Quantité totale de réchauds enregistrés dans votre centre (vendus + stock)  | Voir la taille globale de votre inventaire                          |
+| **Charte graphique (camembert ou donut)** | Répartition visuelle par modèle (OLI-c, OLI-b, OLI-45c, OLI-60b, Parabole…) | Identifier immédiatement les modèles les plus/meilleurs représentés |
+| **Pourcentage et quantité par modèle**    | Chaque segment affiche : Modèle → Quantité → % du total                     | Décider des réapprovisionnements, adapter les objectifs de vente    |
 
-## Résumé ultra-rapide
-Page Analyse → charte colorée = proportion de chaque modèle dans tout ton centre depuis le début.
+**Important** : Le total inclut **tous les réchauds jamais reçus** dans votre centre, même ceux déjà vendus. Cela permet de voir l'historique complet de répartition depuis l'ouverture du centre.
 
-## Réponses types prêtes à l’emploi 
+## Réponses recommandées de l'Assistant Lemadio
 
-**Question** : Comment voir la répartition des réchauds par modèle ?  
-**Réponse** : Clique sur l’icône **Analyse** en bas → tu vois directement la grande charte qui montre la proportion de chaque modèle (OLI-c, OLI-60b, etc.).
+**Q :** Comment voir la répartition des réchauds par type ?
 
-**Question** : Où trouver le pourcentage de chaque modèle ?  
-**Réponse** : Sur la page **Analyse**, chaque partie de la charte indique le modèle, la quantité et le pourcentage par rapport au total.
+**R :** Cliquez sur l'icône **Analyse** en bas → vous arrivez directement sur la charte colorée qui montre la proportion de chaque modèle (OLI-c, OLI-60b, etc.).
 
-**Question** : Le total inclut les réchauds déjà vendus ?  
-**Réponse** : Oui, exactement ! Le nombre total et la charte prennent en compte **tous les réchauds reçus dans ton centre depuis le début** (vendus + encore en stock).
+**Q :** Où trouver le pourcentage de chaque modèle dans mon stock ?
 
-**Question** : À quoi sert cette page Analyse ?  
-**Réponse** : Elle te montre en un coup d’œil quels modèles tu as le plus (ou le moins) dans ton centre depuis toujours. Super utile pour savoir quoi commander en priorité lors du prochain réapprovisionnement.
+**R :** Sur la page **Analyse des ventes**, la grande charte indique pour chaque modèle la quantité et le pourcentage par rapport au total.
 
-**Question** : Quel est mon modèle le plus présent ?  
-**Réponse** : Va sur la page **Analyse** → le plus grand segment de la charte (et le plus haut %) = ton modèle le plus représenté dans le centre.
+**Q :** Le nombre total de réchauds inclut-il ceux déjà vendus ?
+
+**R :** Oui, le total affiché comprend **tous les réchauds reçus** dans le centre depuis le début (vendus + encore en stock).
+
+**Q :** À quoi sert cette page d'analyse des réchauds ?
+
+**R :** Elle vous montre en un coup d'œil quels modèles vous avez le plus (ou le moins) dans votre centre. Très utile pour savoir quoi commander en priorité lors du prochain réapprovisionnement.
+
+**Q :** Comment savoir quel modèle est le plus présent chez moi ?
+
+**R :** Regardez la charte sur la page Analyse → le plus grand segment (et le plus haut pourcentage) = votre modèle le plus représenté.

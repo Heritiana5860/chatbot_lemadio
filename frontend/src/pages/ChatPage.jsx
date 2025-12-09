@@ -177,7 +177,7 @@ const ChatPage = () => {
                               key={idx}
                               className="inline-flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#4B8A34]/10 to-[#FFCC00]/10 text-[#4B8A34] text-xs font-semibold border border-[#4B8A34]/20"
                             >
-                              {source}
+                              {source.split(".")[0]}
                             </span>
                           ))}
                         </div>
